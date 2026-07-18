@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI Guard is a macOS endpoint data-protection application for local AI agents and developer automation.">
+  <meta name="theme-color" content="#07101f">
+  <link rel="canonical" href="https://mohan589.github.io/ai-guard-site/">
+  <title>AI Guard — Endpoint protection for local AI agents</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07101f;
+      --panel: #0d1a2f;
+      --panel-strong: #11233e;
+      --text: #f4f7fb;
+      --muted: #a9b8cb;
+      --line: #263a56;
+      --accent: #62d3b4;
+      --accent-2: #7ea7ff;
+      --warning: #ffd27a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(52, 119, 255, 0.20), transparent 34rem),
+        radial-gradient(circle at 90% 10%, rgba(38, 198, 153, 0.13), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); }
+
+    .shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      font-weight: 750;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid rgba(98, 211, 180, 0.45);
+      border-radius: 11px;
+      background: rgba(98, 211, 180, 0.12);
+      color: var(--accent);
+    }
+
+    nav a {
+      margin-left: 22px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      text-decoration: none;
+    }
+
+    nav a:hover, nav a:focus { color: var(--text); }
+
+    .hero {
+      display: grid;
+      min-height: 650px;
+      align-items: center;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 64px;
+      padding: 80px 0 110px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(3.2rem, 8vw, 6.7rem);
+      line-height: 0.96;
+      letter-spacing: -0.065em;
+    }
+
+    .lede {
+      max-width: 720px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.12rem, 2vw, 1.35rem);
+    }
+
+    .status-card, .card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(150deg, rgba(17, 35, 62, 0.96), rgba(10, 23, 42, 0.92));
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+    }
+
+    .status-card { padding: 28px; }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--warning);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 18px currentColor;
+    }
+
+    .status-card h2 {
+      margin: 20px 0 8px;
+      font-size: 1.55rem;
+      letter-spacing: -0.025em;
+    }
+
+    .status-card p, .card p { margin: 0; color: var(--muted); }
+
+    .facts {
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .facts li {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .facts strong { color: var(--text); }
+    section { padding: 100px 0; }
+
+    .section-heading { max-width: 760px; margin-bottom: 42px; }
+
+    .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .section-heading p { margin: 0; color: var(--muted); font-size: 1.08rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card { padding: 28px; box-shadow: none; }
+    .card .number { color: var(--accent-2); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; }
+    .card h3 { margin: 36px 0 12px; font-size: 1.28rem; }
+
+    .boundary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .boundary .card:first-child { border-color: rgba(98, 211, 180, 0.45); }
+    .boundary ul { margin: 18px 0 0; padding-left: 20px; color: var(--muted); }
+    .boundary li { margin: 10px 0; }
+
+    .privacy {
+      padding: 48px;
+      background:
+        linear-gradient(130deg, rgba(98, 211, 180, 0.09), rgba(126, 167, 255, 0.08)),
+        var(--panel);
+    }
+
+    .privacy h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .privacy p { max-width: 850px; font-size: 1.07rem; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 38px 0 54px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer p { margin: 0; }
+
+    @media (max-width: 820px) {
+      nav { display: none; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 44px; padding: 70px 0 90px; }
+      .grid, .boundary { grid-template-columns: 1fr; }
+      section { padding: 76px 0; }
+      .privacy { padding: 30px; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="brand" href="#top" aria-label="AI Guard home">
+        <span class="mark" aria-hidden="true">◆</span>
+        <span>AI Guard</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#protection">Protection</a>
+        <a href="#endpoint-security">Endpoint Security</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Native macOS endpoint protection</p>
+          <h1>Keep local AI agents away from sensitive data.</h1>
+          <p class="lede">
+            AI Guard is an endpoint data-protection application that evaluates sensitive file
+            access before data is returned to local AI tools, developer automation, and other
+            processes.
+          </p>
+        </div>
+
+        <aside class="status-card" aria-label="Product status">
+          <span class="status"><span class="dot"></span>Pre-release</span>
+          <h2>Entitlement review in progress</h2>
+          <p>
+            AI Guard is being prepared for signed and notarized macOS distribution. It is not
+            currently offered as a public download.
+          </p>
+          <ul class="facts">
+            <li><span>Platform</span><strong>macOS 12+</strong></li>
+            <li><span>Control point</span><strong>Pre-read authorization</strong></li>
+            <li><span>Default processing</span><strong>On device</strong></li>
+          </ul>
+        </aside>
+      </div>
+
+      <section id="protection">
+        <div class="section-heading">
+          <p class="eyebrow">Protection model</p>
+          <h2>Policy at the moment sensitive files are opened.</h2>
+          <p>
+            Optional wrappers cannot cover direct file access. AI Guard uses a native authorization
+            boundary for new sensitive-file opens and keeps policy decisions local.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <span class="number">01</span>
+            <h3>Process attribution</h3>
+            <p>Associate each covered request with process, executable, user, and responsible-process metadata.</p>
+          </article>
+          <article class="card">
+            <span class="number">02</span>
+            <h3>Local policy</h3>
+            <p>Evaluate sensitive paths locally and return an explicit allow, deny, or administrator-backed approval decision.</p>
+          </article>
+          <article class="card">
+            <span class="number">03</span>
+            <h3>Durable audit</h3>
+            <p>Record protected decisions locally with bounded, owner-controlled audit data before an authorized action proceeds.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="endpoint-security">
+        <div class="section-heading">
+          <p class="eyebrow">Apple Endpoint Security usage</p>
+          <h2>Narrow purpose. Explicit boundary.</h2>
+          <p>The requested entitlement is used by <code>com.aiguard.endpoint-security</code>.</p>
+        </div>
+
+        <div class="boundary">
+          <article class="card">
+            <h3>What it does</h3>
+            <ul>
+              <li>Subscribes to <code>ES_EVENT_TYPE_AUTH_OPEN</code>.</li>
+              <li>Evaluates new read opens using file-path and process metadata.</li>
+              <li>Responds with allowed flags or denies the open.</li>
+              <li>Protects configured locations such as environment files, private keys, cloud credentials, browser credential stores, and administrative policy.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>What it does not do</h3>
+            <ul>
+              <li>Does not read or copy file contents through Endpoint Security.</li>
+              <li>Does not use Endpoint Security data for advertising or profiling.</li>
+              <li>Does not silently activate without user or administrator approval.</li>
+              <li>Does not claim complete network or API mediation in the current release.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="privacy">
+        <article class="card privacy">
+          <p class="eyebrow">Privacy by design</p>
+          <h2>Security metadata stays controlled.</h2>
+          <p>
+            Authorization processing occurs on the endpoint. Enterprise audit delivery is optional,
+            administrator-configured, redacted, and limited to policy and process metadata rather
+            than sensitive file contents. This website uses no analytics, advertising, cookies, or
+            client-side scripts.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 AI Guard. Pre-release security software.</p>
+      <p><a href="https://github.com/mohan589">Project owner on GitHub</a></p>
+    </footer>
+  </div>
+</body>
+</html>
